@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inside Nursing Home Fire Safety | DataScience</title>
+  <meta name="description" content="A data-science analysis of nursing home fire safety citations, including key findings and predictive model insights.">
+  <meta name="author" content="ak22137">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Inside Nursing Home Fire Safety — Finding Patterns in Citations">
+  <meta property="og:description" content="State patterns, citation severity trends, and model-driven risk signals from CMS nursing home fire safety data.">
+  <meta property="og:url" content="./">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Inside Nursing Home Fire Safety — Finding Patterns in Citations">
+  <meta name="twitter:description" content="A practical, data-driven look at nursing home fire safety citation patterns.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="hero">
+    <p class="eyebrow">Data Science Blog</p>
+    <h1>Inside Nursing Home Fire Safety — Finding Patterns in Citations</h1>
+    <p class="lede">
+      When families place loved ones in nursing homes, fire readiness is a core expectation. This analysis explores
+      how fire-safety deficiencies appear across facilities and how predictive modeling can support earlier intervention.
+    </p>
+    <div class="hero-links">
+      <a class="button" href="data_science3.ipynb">View Full Notebook</a>
+      <a class="button button-secondary" href="https://data.cms.gov/provider-data/sites/default/files/resources/98aa3596a9af76e285beb7aa7c7244d9_1790792146/NH_FireSafetyCitations_Sep2026_2.csv">CMS Data Source</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section aria-labelledby="questions-title" class="panel">
+      <h2 id="questions-title">Questions of Interest</h2>
+      <ol>
+        <li>Which states see the highest volumes of fire safety citations?</li>
+        <li>What are the most common safety issues flagged during inspections?</li>
+        <li>Can we predict whether a new violation may escalate into high severity?</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="findings-title" class="panel">
+      <h2 id="findings-title">Key Findings</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>State-by-State Volumes</h3>
+          <p>California (CA) and Ohio (OH) show the highest absolute citation counts, reflecting major facility footprints and active inspection activity.</p>
+        </article>
+        <article class="card">
+          <h3>Most Frequent Deficiencies</h3>
+          <p>Smoke deficiencies dominate the dataset (&gt;78,000 cases), followed by gas, vacuum, and electrical system issues.</p>
+        </article>
+        <article class="card">
+          <h3>Severity Distribution</h3>
+          <p>Most citations are moderate (Grades D, E, F). High-severity grades (G–L) are rare, representing less than 0.1% of records.</p>
+          <div class="severity-scale" aria-label="Severity concentration">
+            <span class="badge badge-low">D-F: Common</span>
+            <span class="badge badge-high">G-L: &lt;0.1%</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="model-title" class="panel">
+      <h2 id="model-title">Model Performance &amp; Caveat</h2>
+      <p>
+        A Random Forest classifier was trained to flag potential high-severity outcomes from state, deficiency category,
+        inspection cycle count, and time-to-fix features.
+      </p>
+      <div class="metrics-grid" role="list" aria-label="Model performance metrics">
+        <article class="metric-card" role="listitem">
+          <h3>Overall Accuracy</h3>
+          <p class="metric-value">97.9%</p>
+          <div class="meter" aria-hidden="true"><span style="--value:97.9;"></span></div>
+          <p class="metric-note">High global classification rate across all classes.</p>
+        </article>
+        <article class="metric-card" role="listitem">
+          <h3>Recall / Sensitivity<br><span class="subtle">(High-Severity Class)</span></h3>
+          <p class="metric-value">45%</p>
+          <div class="meter meter-warning" aria-hidden="true"><span style="--value:45;"></span></div>
+          <p class="metric-note">Share of true high-severity cases captured.</p>
+        </article>
+      </div>
+      <aside class="callout" aria-label="Important modeling caveat">
+        <strong>Important:</strong> The dataset is highly imbalanced, so accuracy alone is not sufficient to evaluate
+        model usefulness. Recall/sensitivity for rare high-severity cases is critical for operational decision-making.
+      </aside>
+    </section>
+
+    <section aria-labelledby="scenario-title" class="panel">
+      <h2 id="scenario-title">Hypothetical Scenario</h2>
+      <p>
+        For a second-cycle inspection in California with a smoke deficiency and a projected 20-day resolution window,
+        the model estimates:
+      </p>
+      <ul class="scenario-list">
+        <li><span class="badge badge-low">84.78%</span> probability of Low-to-Moderate Severity</li>
+        <li><span class="badge badge-high">15.22%</span> probability of High Severity</li>
+      </ul>
+      <p class="subtle">This risk signal helps prioritize follow-up actions before outcomes worsen.</p>
+    </section>
+
+    <section aria-labelledby="takeaway-title" class="panel">
+      <h2 id="takeaway-title">Takeaway</h2>
+      <p>
+        Data-informed oversight can shift safety management from reactive enforcement to proactive prevention. Combining
+        frequent deficiency patterns with predictive risk scoring supports earlier intervention where residents may face
+        elevated harm.
+      </p>
+    </section>
+
+    <section aria-labelledby="crisp-title" class="panel">
+      <h2 id="crisp-title">CRISP-DM Summary</h2>
+      <ol class="crisp-list">
+        <li><strong>Business/Data Understanding:</strong> Identify major risk drivers in nursing home fire safety citations.</li>
+        <li><strong>Exploratory Data Analysis:</strong> Compare citation volume by state and category; smoke deficiencies emerged as most common.</li>
+        <li><strong>Modeling:</strong> Train a Random Forest classifier with class balancing to address severe class imbalance.</li>
+        <li><strong>Evaluation:</strong> Achieve 97.9% overall accuracy and 45% recall/sensitivity for rare high-severity violations.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Project resources: <a href="data_science3.ipynb">Notebook</a> ·
+      <a href="https://data.cms.gov/provider-data/sites/default/files/resources/98aa3596a9af76e285beb7aa7c7244d9_1790792146/NH_FireSafetyCitations_Sep2026_2.csv">CMS CSV Source</a>
+    </p>
+  </footer>
+</body>
+</html>
