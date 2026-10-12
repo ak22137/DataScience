@@ -3,346 +3,175 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inside Nursing Home Fire Safety | DataScience</title>
-  <meta name="description" content="A data-science analysis of nursing home fire safety citations, including key findings and predictive model insights.">
-  <meta name="author" content="ak22137">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Inside Nursing Home Fire Safety — Finding Patterns in Citations">
-  <meta property="og:description" content="State patterns, citation severity trends, and model-driven risk signals from CMS nursing home fire safety data.">
-  <meta property="og:url" content="./">
-  <meta property="og:image" content="assets/fire-safety-thumbnail.svg">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Inside Nursing Home Fire Safety — Finding Patterns in Citations">
-  <meta name="twitter:description" content="A practical, data-driven look at nursing home fire safety citation patterns.">
-  <meta name="twitter:image" content="assets/fire-safety-thumbnail.svg">
+  <meta name="description" content="An exploratory analysis of CMS nursing-home fire-safety citations, recurring deficiencies, and high-severity risk screening.">
+  <title>Inside Nursing Home Fire Safety — Finding Patterns in Citations</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
-  <header class="hero">
+  <header class="site-header">
     <p class="eyebrow">Data Science Blog</p>
     <h1>Inside Nursing Home Fire Safety — Finding Patterns in Citations</h1>
-    <img
-      class="thumbnail"
-      src="assets/fire-safety-thumbnail.svg"
-      alt="Illustrated fire alarm and smoke detector safety poster for nursing-home inspections"
-      width="1280"
-      height="720">
-    <p class="attribution">
-      Thumbnail source: <code>assets/fire-safety-thumbnail.svg</code> (original repository illustration created for this project).
-    </p>
-    <p class="lede">
-      This post summarizes notebook results from the CMS nursing-home fire-safety citations dataset. The analysis reviews
-      where citations cluster, what deficiencies are most frequent, and how a simple model flags high-severity risk.
-    </p>
-    <div class="hero-links">
-      <a class="button" href="data_science3.ipynb">View Full Notebook</a>
-      <a class="button button-secondary" href="https://data.cms.gov/provider-data/sites/default/files/resources/98aa3596a9af76e285beb7aa7c7244d9_1790792146/NH_FireSafetyCitations_Sep2026_2.csv">CMS Data Source</a>
-    </div>
+    <figure class="hero-figure">
+      <img src="assets/fire-safety-thumbnail.svg" alt="Illustration of a smoke detector, fire alarm, and nursing-home fire-safety inspection chart">
+      <figcaption>Original project illustration; stored locally in the repository.</figcaption>
+    </figure>
+    <p class="intro">This post summarizes notebook results from the CMS nursing-home fire-safety citations dataset. It examines where citations cluster, which deficiencies appear most often, and whether a simple model can help flag high-severity risk.</p>
+    <nav class="resource-links" aria-label="Project resources">
+      <a href="data_science3.ipynb">View full notebook</a>
+      <a href="https://data.cms.gov/provider-data/sites/default/files/resources/98aa3596a9af76e285beb7aa7c7244d9_1790792146/NH_FireSafetyCitations_Sep2026_2.csv">CMS data source</a>
+    </nav>
   </header>
 
   <main id="main-content">
-    <section aria-labelledby="questions-title" class="panel">
-      <h2 id="questions-title">Questions of Interest</h2>
+    <section class="panel questions-overview" aria-labelledby="questions-title">
+      <h2 id="questions-title">Questions of interest</h2>
       <ol>
-        <li>Which states see the highest volumes of fire safety citations?</li>
+        <li>Which states see the highest volumes of fire-safety citations?</li>
         <li>What are the most common safety issues flagged during inspections?</li>
-        <li>Can we predict whether a new violation may escalate into high severity?</li>
+        <li>Can we predict whether a citation will be high severity?</li>
       </ol>
     </section>
 
-    <section aria-labelledby="q1-title" class="panel question">
+    <section class="panel question" aria-labelledby="q1-title">
       <h2 id="q1-title">Question 1: Which states see the highest volumes of fire-safety citations?</h2>
-      <div class="hypothesis">
-        <h3>Hypothesis</h3>
-        <p>States with larger nursing-home footprints (for example CA and OH) will show the highest citation volume.</p>
-      </div>
-      <div class="answer">
-        <h3>Answer</h3>
-        <p>The notebook supports this: California and Ohio appear at the top of the state-citation ranking.</p>
+      <div class="two-column">
+        <div class="hypothesis">
+          <h3>Hypothesis</h3>
+          <p>States with larger nursing-home footprints may show the highest citation volume.</p>
+        </div>
+        <div class="answer">
+          <h3>Answer</h3>
+          <p>The notebook ranking places California and Ohio at the top of the state-citation chart.</p>
+        </div>
       </div>
       <div class="visual-evidence">
         <h3>Visual evidence</h3>
         <figure class="chart">
-          <img src="assets/q1-state-visual.svg" alt="State citation visual with California and Ohio exact counts and ranked top-tier states">
-          <figcaption>Local visual for Q1: exact CA/OH values plus ranked top-tier states from the notebook top-15 chart.</figcaption>
+          <img src="assets/q1-state-visual.svg" alt="State citation chart showing California above 23,600 citations and Ohio above 16,300, followed by Texas, New York, and Pennsylvania in the top-15 group">
+          <figcaption>State citation-volume summary. Exact values are shown only where reported in the notebook summary.</figcaption>
         </figure>
-        <table class="data-table">
-          <caption>State citation evidence from notebook outputs</caption>
-          <thead>
-            <tr>
-              <th scope="col">State</th>
-              <th scope="col">Visible value</th>
-              <th scope="col">Notebook basis</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">California (CA)</th>
-              <td>23,600+ citations</td>
-              <td>Highest bar in top-15 state chart</td>
-            </tr>
-            <tr>
-              <th scope="row">Ohio (OH)</th>
-              <td>16,300+ citations</td>
-              <td>Second-highest bar in top-15 state chart</td>
-            </tr>
-            <tr>
-              <th scope="row">Texas (TX)</th>
-              <td>Top-tier rank (top-15)</td>
-              <td>Appears directly below OH in notebook ranking group</td>
-            </tr>
-            <tr>
-              <th scope="row">New York (NY)</th>
-              <td>Top-tier rank (top-15)</td>
-              <td>Appears in top-ranking state cluster</td>
-            </tr>
-            <tr>
-              <th scope="row">Pennsylvania (PA)</th>
-              <td>Top-tier rank (top-15)</td>
-              <td>Appears in top-ranking state cluster</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="bar-chart" role="img" aria-label="Relative state citation volume: California highest, Ohio second, Texas New York and Pennsylvania in the next tier.">
-          <div class="bar-row">
-            <span class="bar-label">CA (highest)</span>
-            <span class="bar-track"><span class="bar-fill" style="width: 100%;">Highest</span></span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">OH (2nd)</span>
-            <span class="bar-track"><span class="bar-fill" style="width: 69%;">2nd</span></span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">TX</span>
-            <span class="bar-track"><span class="bar-fill" style="width: 54%;">Top tier</span></span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">NY</span>
-            <span class="bar-track"><span class="bar-fill" style="width: 50%;">Top tier</span></span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">PA</span>
-            <span class="bar-track"><span class="bar-fill" style="width: 46%;">Top tier</span></span>
-          </div>
+        <div class="table-wrap">
+          <table>
+            <caption>State citation evidence</caption>
+            <thead><tr><th scope="col">State</th><th scope="col">Reported value</th><th scope="col">Evidence</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">California (CA)</th><td>23,600+ citations</td><td>Highest bar in the notebook's top-15 state chart</td></tr>
+              <tr><th scope="row">Ohio (OH)</th><td>16,300+ citations</td><td>Second-highest bar in the chart</td></tr>
+              <tr><th scope="row">Texas (TX)</th><td>Top 15</td><td>Included in the notebook's top-state group</td></tr>
+              <tr><th scope="row">New York (NY)</th><td>Top 15</td><td>Included in the notebook's top-state group</td></tr>
+              <tr><th scope="row">Pennsylvania (PA)</th><td>Top 15</td><td>Included in the notebook's top-state group</td></tr>
+            </tbody>
+          </table>
         </div>
-        <figure class="chart">
-          <img src="assets/state-citations-top15.png" alt="Notebook chart of top states by fire-safety citation count">
-          <figcaption>Notebook-exported PNG (backup visual): Top 15 states by citation volume.</figcaption>
-        </figure>
       </div>
       <div class="conclusion">
         <h3>Conclusion</h3>
-        <p><strong>Hypothesis supported:</strong> The highest citation volume is concentrated in large-state clusters, with CA and OH clearly leading in the notebook evidence.</p>
+        <p><strong>Hypothesis supported by the reported ranking.</strong> California and Ohio lead the cited state totals. Raw counts alone do not establish that residents in those states face greater per-facility risk; facility counts and inspection rates would be needed for a fair comparison.</p>
       </div>
     </section>
 
-    <section aria-labelledby="q2-title" class="panel question">
+    <section class="panel question" aria-labelledby="q2-title">
       <h2 id="q2-title">Question 2: What are the most common safety issues flagged during inspections?</h2>
-      <div class="hypothesis">
-        <h3>Hypothesis</h3>
-        <p>Smoke-related deficiencies are the dominant fire-safety issue across inspections.</p>
-      </div>
-      <div class="answer">
-        <h3>Answer</h3>
-        <p>The notebook confirms this pattern: Smoke Deficiencies are the largest category by a wide margin.</p>
+      <div class="two-column">
+        <div class="hypothesis">
+          <h3>Hypothesis</h3>
+          <p>Smoke-related deficiencies are the dominant fire-safety issue across the dataset.</p>
+        </div>
+        <div class="answer">
+          <h3>Answer</h3>
+          <p>The notebook summary identifies Smoke Deficiencies as the largest category by a wide margin.</p>
+        </div>
       </div>
       <div class="visual-evidence">
         <h3>Visual evidence</h3>
         <figure class="chart">
-          <img src="assets/q2-category-visual.svg" alt="Deficiency-category visual showing smoke deficiencies dominate and other categories ranked below">
-          <figcaption>Local visual for Q2: smoke-deficiency magnitude plus notebook-supported category ordering.</figcaption>
+          <img src="assets/q2-category-visual.svg" alt="Deficiency category chart with smoke deficiencies above 78,000 citations, approximately 39 percent of records, and other categories ranked below">
+          <figcaption>Deficiency-category summary. Bar lengths are illustrative of the reported ranking, not additional measured values.</figcaption>
         </figure>
-        <table class="data-table">
-          <caption>Deficiency-category evidence from notebook narrative and chart</caption>
-          <thead>
-            <tr>
-              <th scope="col">Category</th>
-              <th scope="col">Visible value</th>
-              <th scope="col">Notebook basis</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Smoke Deficiencies</th>
-              <td>78,000+ citations (~39% of records)</td>
-              <td>Largest category in notebook top-10 chart</td>
-            </tr>
-            <tr>
-              <th scope="row">Gas, Vacuum, or Electrical Systems</th>
-              <td>Second-tier frequency</td>
-              <td>Appears as the next major group after smoke deficiencies</td>
-            </tr>
-            <tr>
-              <th scope="row">Sprinkler / suppression-related issues</th>
-              <td>Recurring high-frequency group</td>
-              <td>Appears within top categories in notebook ranking</td>
-            </tr>
-            <tr>
-              <th scope="row">Means of egress / exit path issues</th>
-              <td>Recurring high-frequency group</td>
-              <td>Appears within top categories in notebook ranking</td>
-            </tr>
-            <tr>
-              <th scope="row">Fire-safety plan / drill issues</th>
-              <td>Recurring high-frequency group</td>
-              <td>Appears within top categories in notebook ranking</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="bar-chart" role="img" aria-label="Relative deficiency-category prevalence with smoke deficiencies as the largest category.">
-          <div class="bar-row">
-            <span class="bar-label">Smoke Deficiencies</span>
-            <span class="bar-track"><span class="bar-fill" style="width: 100%;">~39%</span></span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">Gas/Vacuum/Electrical</span>
-            <span class="bar-track"><span class="bar-fill" style="width: 41%;">Frequent</span></span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">Sprinkler/Suppression</span>
-            <span class="bar-track"><span class="bar-fill" style="width: 26%;">Recurring</span></span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">Other Top-10 Categories</span>
-            <span class="bar-track"><span class="bar-fill" style="width: 18%;">Tail</span></span>
-          </div>
+        <div class="table-wrap">
+          <table>
+            <caption>Deficiency-category evidence</caption>
+            <thead><tr><th scope="col">Category</th><th scope="col">Reported value</th><th scope="col">Notebook basis</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Smoke Deficiencies</th><td>78,000+ citations; about 39%</td><td>Largest category in the top-10 chart</td></tr>
+              <tr><th scope="row">Gas, Vacuum, or Electrical Systems</th><td>Frequent</td><td>Next major group in the reported ranking</td></tr>
+              <tr><th scope="row">Sprinkler / suppression</th><td>Recurring</td><td>Included among the top categories</td></tr>
+              <tr><th scope="row">Means of egress / exit paths</th><td>Recurring</td><td>Included among the top categories</td></tr>
+              <tr><th scope="row">Other top categories</th><td>Distributed tail</td><td>Remaining categories in the top-10 group</td></tr>
+            </tbody>
+          </table>
         </div>
-        <figure class="chart">
-          <img src="assets/deficiency-categories-top10.png" alt="Notebook chart of top fire-safety deficiency categories">
-          <figcaption>Notebook-exported PNG (backup visual): Top 10 deficiency categories.</figcaption>
-        </figure>
       </div>
       <div class="conclusion">
         <h3>Conclusion</h3>
-        <p><strong>Hypothesis supported:</strong> Smoke Deficiencies clearly dominate, while electrical/systems issues form the next major risk cluster.</p>
+        <p><strong>Hypothesis supported by the reported category ranking.</strong> Smoke Deficiencies dominate the counts, with systems, suppression, and egress issues also appearing in the leading groups. Counts indicate frequency, not necessarily the severity of each deficiency.</p>
       </div>
     </section>
 
-    <section aria-labelledby="q3-title" class="panel question">
-      <h2 id="q3-title">Question 3: Can we predict whether a citation will become high severity?</h2>
-      <div class="hypothesis">
-        <h3>Hypothesis</h3>
-        <p>A model using state, deficiency category, inspection cycle, and resolution days can flag a meaningful share of high-severity cases, but class imbalance limits certainty.</p>
-      </div>
-      <div class="answer">
-        <h3>Answer</h3>
-        <p>The notebook model shows strong overall accuracy but only moderate high-severity recall, so it supports risk triage rather than causal proof.</p>
+    <section class="panel question" aria-labelledby="q3-title">
+      <h2 id="q3-title">Question 3: Can we predict whether a citation will be high severity?</h2>
+      <div class="two-column">
+        <div class="hypothesis">
+          <h3>Hypothesis</h3>
+          <p>A model using state, deficiency category, inspection cycle, and resolution days may support screening, but class imbalance will limit certainty.</p>
+        </div>
+        <div class="answer">
+          <h3>Answer</h3>
+          <p>The reported Random Forest result has high overall accuracy but moderate recall for the rare high-severity class. It is better treated as a triage experiment than a dependable decision system.</p>
+        </div>
       </div>
       <div class="visual-evidence">
         <h3>Visual evidence</h3>
         <figure class="chart">
-          <img src="assets/q3-model-visual.svg" alt="Severity distribution and model metrics visual with percentages and probabilities">
-          <figcaption>Local visual for Q3: class imbalance and model outputs with explicit percentages.</figcaption>
+          <img src="assets/q3-model-visual.svg" alt="Model summary showing 99.8951 percent low-to-moderate cases, 0.1049 percent high-severity cases, 97.8595 percent accuracy, 45 percent high-severity recall, and scenario probabilities">
+          <figcaption>Severity imbalance and model metrics reported in the notebook summary.</figcaption>
         </figure>
-        <table class="data-table">
-          <caption>Severity distribution (notebook-supported)</caption>
-          <thead>
-            <tr>
-              <th scope="col">Severity grouping</th>
-              <th scope="col">Notebook statistic</th>
-              <th scope="col">Interpretation</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Low-to-moderate class</th>
-              <td>99.8951% (target class = 0)</td>
-              <td>Dominant majority of records</td>
-            </tr>
-            <tr>
-              <th scope="row">High-severity class</th>
-              <td>0.1049% (target class = 1)</td>
-              <td>Rare minority class</td>
-            </tr>
-            <tr>
-              <th scope="row">Scope-severity letters</th>
-              <td>D/E/F dominate; G-L are rare (&lt;0.1%)</td>
-              <td>Severe outcomes are infrequent but critical</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="bar-chart" role="img" aria-label="Severity class distribution from notebook target variable proportions.">
-          <div class="bar-row">
-            <span class="bar-label">Low-to-moderate</span>
-            <span class="bar-track"><span class="bar-fill" style="width: 99.9%;">99.8951%</span></span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">High severity</span>
-            <span class="bar-track"><span class="bar-fill" style="width: 0.6%; min-width: 5.25rem;">0.1049%</span></span>
-          </div>
+        <div class="table-wrap">
+          <table>
+            <caption>Severity distribution and model metrics</caption>
+            <thead><tr><th scope="col">Metric / scenario</th><th scope="col">Reported result</th><th scope="col">Interpretation</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Low-to-moderate class</th><td>99.8951%</td><td>Dominant target class (0)</td></tr>
+              <tr><th scope="row">High-severity class</th><td>0.1049%</td><td>Rare target class (1)</td></tr>
+              <tr><th scope="row">Overall accuracy</th><td>97.8595%</td><td>Can be misleading with extreme imbalance</td></tr>
+              <tr><th scope="row">High-severity recall</th><td>45%</td><td>Model identified 45% of high-severity examples in the reported evaluation</td></tr>
+              <tr><th scope="row">Scenario</th><td>CA + smoke deficiency + cycle 2 + 20 resolution days</td><td>Predicted low-to-moderate severity</td></tr>
+              <tr><th scope="row">Scenario probability</th><td>84.78% low-to-moderate; 15.22% high severity</td><td>Model estimate for this input, not a verified real-world risk</td></tr>
+            </tbody>
+          </table>
         </div>
-        <figure class="chart">
-          <img src="assets/severity-distribution.png" alt="Notebook chart showing scope-severity code distribution concentrated in lower-severity letters">
-          <figcaption>Notebook-exported PNG (backup visual): scope-severity distribution.</figcaption>
-        </figure>
       </div>
-
-      <table class="data-table">
-        <caption>Model metrics and scenario statistics (Random Forest, notebook output)</caption>
-        <thead>
-          <tr>
-            <th scope="col">Metric / Scenario</th>
-            <th scope="col">Result from notebook</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Overall accuracy</th>
-            <td>97.8595%</td>
-          </tr>
-          <tr>
-            <th scope="row">Recall (high-severity class)</th>
-            <td>45%</td>
-          </tr>
-          <tr>
-            <th scope="row">Scenario: CA + Smoke deficiency + Cycle 2 + 20 resolution days</th>
-            <td>Predicted low-to-moderate severity (classification output)</td>
-          </tr>
-          <tr>
-            <th scope="row">Scenario probability: low-to-moderate severity</th>
-            <td>84.78%</td>
-          </tr>
-          <tr>
-            <th scope="row">Scenario probability: high severity</th>
-            <td>15.22%</td>
-          </tr>
-        </tbody>
-      </table>
       <div class="conclusion">
         <h3>Conclusion</h3>
-        <p><strong>Hypothesis partially supported:</strong> the model is useful for screening (45% high-severity recall) but does <em>not</em> establish causality, and rare-event imbalance requires caution.</p>
+        <p><strong>Hypothesis partially supported.</strong> The reported 45% high-severity recall suggests possible screening value, but it also means more than half of high-severity cases may be missed at the evaluated operating point. Accuracy alone is insufficient for this rare-event problem.</p>
       </div>
-
       <aside class="callout" aria-label="Model caveat">
-        <strong>Caveat:</strong> These predictions indicate statistical association for prioritization, not proof that any feature causes severe outcomes.
+        <strong>Important caveat:</strong> These outputs represent statistical associations, not proof that any feature causes a severe outcome. Before operational use, check for data leakage (especially if resolution days are only known after the outcome), evaluate precision-recall and confusion matrices, calibrate probabilities, and validate on a later time period.
       </aside>
     </section>
 
-    <section aria-labelledby="takeaway-title" class="panel">
+    <section class="panel" aria-labelledby="takeaway-title">
       <h2 id="takeaway-title">Takeaway</h2>
-      <p>
-        Data-informed oversight can shift safety management from reactive enforcement to proactive prevention. Combining
-        frequent deficiency patterns with predictive risk scoring supports earlier intervention where residents may face
-        elevated harm.
-      </p>
+      <p>Data-informed oversight may help safety teams prioritize follow-up before deficiencies persist or worsen. Combining common deficiency patterns with carefully validated risk screening could support earlier intervention, but the analysis should complement—not replace—official inspection and professional judgment.</p>
     </section>
 
-    <section aria-labelledby="crisp-title" class="panel">
-      <h2 id="crisp-title">CRISP-DM Summary</h2>
+    <section class="panel" aria-labelledby="crisp-title">
+      <h2 id="crisp-title">CRISP-DM summary</h2>
       <ol class="crisp-list">
-        <li><strong>Business/Data Understanding:</strong> Identify major risk drivers in nursing home fire-safety citations.</li>
-        <li><strong>Exploratory Data Analysis:</strong> Compare citation volume by state and deficiency category.</li>
-        <li><strong>Modeling:</strong> Train a class-balanced Random Forest pipeline.</li>
-        <li><strong>Evaluation:</strong> Review accuracy with special focus on recall for rare high-severity outcomes.</li>
+        <li><strong>Business and data understanding:</strong> Identify recurring fire-safety citation patterns in nursing homes.</li>
+        <li><strong>Exploratory data analysis:</strong> Compare reported citation volume by state and deficiency category.</li>
+        <li><strong>Data preparation and modeling:</strong> Prepare features and train a Random Forest classifier for the high-severity target.</li>
+        <li><strong>Evaluation:</strong> Interpret accuracy alongside high-severity recall and the extreme class imbalance.</li>
+        <li><strong>Deployment considerations:</strong> Treat the model as exploratory until leakage, calibration, and time-based validation are addressed.</li>
       </ol>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Project resources: <a href="data_science3.ipynb">Notebook</a> ·
-      <a href="https://data.cms.gov/provider-data/sites/default/files/resources/98aa3596a9af76e285beb7aa7c7244d9_1790792146/NH_FireSafetyCitations_Sep2026_2.csv">CMS CSV Source</a>
-    </p>
+    <p><strong>Project resources:</strong> <a href="data_science3.ipynb">Notebook</a> · <a href="https://data.cms.gov/provider-data/sites/default/files/resources/98aa3596a9af76e285beb7aa7c7244d9_1790792146/NH_FireSafetyCitations_Sep2026_2.csv">CMS CSV source</a></p>
+    <p>Educational analysis only. It is not a substitute for official regulatory inspection, legal compliance review, or professional fire-safety advice.</p>
   </footer>
 </body>
 </html>
+
