@@ -20,9 +20,20 @@
   <header class="hero">
     <p class="eyebrow">Data Science Blog</p>
     <h1>Inside Nursing Home Fire Safety — Finding Patterns in Citations</h1>
+    <figure class="hero-media">
+      <img
+        src="https://cdn.pixabay.com/photo/2014/01/17/19/01/fire-alarm-246068_1280.jpg"
+        alt="Wall-mounted smoke detector and fire alarm in a hallway"
+        loading="lazy">
+      <figcaption>
+        Blog thumbnail image source:
+        <a href="https://pixabay.com/photos/fire-alarm-smoke-detector-502893/">Pixabay — “Fire alarm smoke detector”</a>
+        (Pixabay Content License).
+      </figcaption>
+    </figure>
     <p class="lede">
-      When families place loved ones in nursing homes, fire readiness is a core expectation. This analysis explores
-      how fire-safety deficiencies appear across facilities and how predictive modeling can support earlier intervention.
+      This post summarizes notebook results from the CMS nursing-home fire-safety citations dataset. The analysis reviews
+      where citations cluster, what deficiencies are most frequent, and how a simple model flags high-severity risk.
     </p>
     <div class="hero-links">
       <a class="button" href="data_science3.ipynb">View Full Notebook</a>
@@ -40,65 +51,67 @@
       </ol>
     </section>
 
-    <section aria-labelledby="findings-title" class="panel">
-      <h2 id="findings-title">Key Findings</h2>
-      <div class="cards">
-        <article class="card">
-          <h3>State-by-State Volumes</h3>
-          <p>California (CA) and Ohio (OH) show the highest absolute citation counts, reflecting major facility footprints and active inspection activity.</p>
-        </article>
-        <article class="card">
-          <h3>Most Frequent Deficiencies</h3>
-          <p>Smoke deficiencies dominate the dataset (&gt;78,000 cases), followed by gas, vacuum, and electrical system issues.</p>
-        </article>
-        <article class="card">
-          <h3>Severity Distribution</h3>
-          <p>Most citations are moderate (Grades D, E, F). High-severity grades (G–L) are rare, representing less than 0.1% of records.</p>
-          <div class="severity-scale" aria-label="Severity concentration">
-            <span class="badge badge-low">D-F: Common</span>
-            <span class="badge badge-high">G-L: &lt;0.1%</span>
-          </div>
-        </article>
-      </div>
+    <section aria-labelledby="q1-title" class="panel question">
+      <h2 id="q1-title">Question 1: Which states see the highest volumes of fire-safety citations?</h2>
+      <p><strong>Answer:</strong> The notebook's top-15 chart shows California and Ohio at the top, followed by large-state clusters such as Texas, New York, and Pennsylvania.</p>
+      <figure class="chart">
+        <img src="assets/state-citations-top15.png" alt="Horizontal bar chart of the top 15 states by total fire-safety citations">
+        <figcaption>Notebook visual: Top 15 states by total citation volume.</figcaption>
+      </figure>
     </section>
 
-    <section aria-labelledby="model-title" class="panel">
-      <h2 id="model-title">Model Performance &amp; Caveat</h2>
-      <p>
-        A Random Forest classifier was trained to flag potential high-severity outcomes from state, deficiency category,
-        inspection cycle count, and time-to-fix features.
-      </p>
-      <div class="metrics-grid" role="list" aria-label="Model performance metrics">
-        <article class="metric-card" role="listitem">
-          <h3>Overall Accuracy</h3>
-          <p class="metric-value">97.9%</p>
-          <div class="meter" aria-hidden="true"><span style="--value:97.9;"></span></div>
-          <p class="metric-note">High global classification rate across all classes.</p>
-        </article>
-        <article class="metric-card" role="listitem">
-          <h3>Recall / Sensitivity<br><span class="subtle">(High-Severity Class)</span></h3>
-          <p class="metric-value">45%</p>
-          <div class="meter meter-warning" aria-hidden="true"><span style="--value:45;"></span></div>
-          <p class="metric-note">Share of true high-severity cases captured.</p>
-        </article>
-      </div>
-      <aside class="callout" aria-label="Important modeling caveat">
-        <strong>Important:</strong> The dataset is highly imbalanced, so accuracy alone is not sufficient to evaluate
-        model usefulness. Recall/sensitivity for rare high-severity cases is critical for operational decision-making.
+    <section aria-labelledby="q2-title" class="panel question">
+      <h2 id="q2-title">Question 2: What are the most common safety issues flagged during inspections?</h2>
+      <p><strong>Answer:</strong> Smoke deficiencies are the largest category in the notebook output, with gas, vacuum, electrical, and sprinkler-related deficiencies appearing frequently behind it.</p>
+      <figure class="chart">
+        <img src="assets/deficiency-categories-top10.png" alt="Horizontal bar chart of the top 10 fire-safety deficiency categories">
+        <figcaption>Notebook visual: Top 10 deficiency categories by citation count.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="q3-title" class="panel question">
+      <h2 id="q3-title">Question 3: Can we predict whether a citation will become high severity?</h2>
+      <p><strong>Answer:</strong> The severity distribution is highly imbalanced, and the model captures some high-risk cases while missing others, so recall matters more than accuracy alone.</p>
+      <figure class="chart">
+        <img src="assets/severity-distribution.png" alt="Bar chart of scope severity code distribution showing concentration in lower-severity letters">
+        <figcaption>Notebook visual: Scope-severity distribution used for target-class framing.</figcaption>
+      </figure>
+
+      <table>
+        <caption>Notebook model outputs (Random Forest on test split)</caption>
+        <thead>
+          <tr>
+            <th scope="col">Metric / Scenario</th>
+            <th scope="col">Result from notebook</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Overall accuracy</th>
+            <td>97.86%</td>
+          </tr>
+          <tr>
+            <th scope="row">Recall (high-severity class)</th>
+            <td>45%</td>
+          </tr>
+          <tr>
+            <th scope="row">Scenario: CA + Smoke deficiency + Cycle 2 + 20 resolution days</th>
+            <td>Predicted low-to-moderate severity</td>
+          </tr>
+          <tr>
+            <th scope="row">Scenario probability: low-to-moderate severity</th>
+            <td>84.78%</td>
+          </tr>
+          <tr>
+            <th scope="row">Scenario probability: high severity</th>
+            <td>15.22%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <aside class="callout" aria-label="Model caveat">
+        <strong>Caveat:</strong> The high-severity class is rare (~0.1% in the notebook), so a high accuracy score alone can overstate practical risk-detection performance.
       </aside>
-    </section>
-
-    <section aria-labelledby="scenario-title" class="panel">
-      <h2 id="scenario-title">Hypothetical Scenario</h2>
-      <p>
-        For a second-cycle inspection in California with a smoke deficiency and a projected 20-day resolution window,
-        the model estimates:
-      </p>
-      <ul class="scenario-list">
-        <li><span class="badge badge-low">84.78%</span> probability of Low-to-Moderate Severity</li>
-        <li><span class="badge badge-high">15.22%</span> probability of High Severity</li>
-      </ul>
-      <p class="subtle">This risk signal helps prioritize follow-up actions before outcomes worsen.</p>
     </section>
 
     <section aria-labelledby="takeaway-title" class="panel">
@@ -113,10 +126,10 @@
     <section aria-labelledby="crisp-title" class="panel">
       <h2 id="crisp-title">CRISP-DM Summary</h2>
       <ol class="crisp-list">
-        <li><strong>Business/Data Understanding:</strong> Identify major risk drivers in nursing home fire safety citations.</li>
-        <li><strong>Exploratory Data Analysis:</strong> Compare citation volume by state and category; smoke deficiencies emerged as most common.</li>
-        <li><strong>Modeling:</strong> Train a Random Forest classifier with class balancing to address severe class imbalance.</li>
-        <li><strong>Evaluation:</strong> Achieve 97.9% overall accuracy and 45% recall/sensitivity for rare high-severity violations.</li>
+        <li><strong>Business/Data Understanding:</strong> Identify major risk drivers in nursing home fire-safety citations.</li>
+        <li><strong>Exploratory Data Analysis:</strong> Compare citation volume by state and deficiency category.</li>
+        <li><strong>Modeling:</strong> Train a class-balanced Random Forest pipeline.</li>
+        <li><strong>Evaluation:</strong> Review accuracy with special focus on recall for rare high-severity outcomes.</li>
       </ol>
     </section>
   </main>
