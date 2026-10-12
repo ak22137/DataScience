@@ -1,33 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="q2t q2d">
-  <title id="q2t">Deficiency category distribution evidence</title>
-  <desc id="q2d">Horizontal bars showing smoke deficiencies as the dominant category and relative ranking of other notebook top categories.</desc>
-  <rect width="1200" height="620" fill="#ffffff"/>
-  <text x="60" y="60" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#0f172a">Question 2 visual: Deficiency category evidence</text>
-  <text x="60" y="96" font-family="Arial, sans-serif" font-size="22" fill="#334155">Source: data_science3.ipynb top-category analysis</text>
-
-  <g font-family="Arial, sans-serif" font-size="23" fill="#0f172a" font-weight="600">
-    <text x="60" y="166">Smoke Deficiencies — 78,000+ citations (~39%)</text>
-    <text x="60" y="236">Gas/Vacuum/Electrical Systems — second-tier frequency</text>
-    <text x="60" y="306">Sprinkler/Suppression related issues — recurring</text>
-    <text x="60" y="376">Means of Egress/Exit paths — recurring</text>
-    <text x="60" y="446">Fire Safety Plan & drills — recurring</text>
-  </g>
-
-  <g>
-    <rect x="620" y="138" width="500" height="34" rx="8" fill="#7c3aed"/>
-    <rect x="620" y="208" width="230" height="34" rx="8" fill="#8b5cf6"/>
-    <rect x="620" y="278" width="170" height="34" rx="8" fill="#a78bfa"/>
-    <rect x="620" y="348" width="154" height="34" rx="8" fill="#a78bfa"/>
-    <rect x="620" y="418" width="138" height="34" rx="8" fill="#c4b5fd"/>
-  </g>
-
-  <g font-family="Arial, sans-serif" font-size="22" fill="#0f172a">
-    <text x="1130" y="164" text-anchor="end">largest category</text>
-    <text x="860" y="234">relative index ≈ 0.46</text>
-    <text x="800" y="304">relative index ≈ 0.34</text>
-    <text x="784" y="374">relative index ≈ 0.31</text>
-    <text x="768" y="444">relative index ≈ 0.28</text>
-  </g>
-
-  <text x="60" y="548" font-family="Arial, sans-serif" font-size="20" fill="#475569">Smoke count and share are explicit notebook-supported values; remaining bars encode ordered relative prevalence from the notebook top-10 chart.</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">Most common fire-safety deficiency categories</title><desc id="desc">Smoke deficiencies are the largest category with more than 78,000 citations, approximately 39 percent of records.</desc>
+<rect width="1000" height="560" rx="20" fill="#fbfdfe"/><text x="42" y="52" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#182331">Most common deficiency categories</text><text x="42" y="82" font-family="Arial,sans-serif" font-size="16" fill="#586879">Smoke deficiencies are the dominant category</text>
+<g font-family="Arial,sans-serif" font-size="17" fill="#253747"><text x="42" y="145">Smoke deficiencies</text><text x="42" y="225">Gas / vacuum / electrical</text><text x="42" y="305">Sprinkler / suppression</text><text x="42" y="385">Egress / exit paths</text><text x="42" y="465">Other top categories</text></g>
+<g fill="#e7eef2"><rect x="330" y="116" width="590" height="42" rx="8"/><rect x="330" y="196" width="590" height="42" rx="8"/><rect x="330" y="276" width="590" height="42" rx="8"/><rect x="330" y="356" width="590" height="42" rx="8"/><rect x="330" y="436" width="590" height="42" rx="8"/></g>
+<g fill="#d66d3c"><rect x="330" y="116" width="590" height="42" rx="8"/><rect x="330" y="196" width="242" height="42" rx="8"/><rect x="330" y="276" width="183" height="42" rx="8"/><rect x="330" y="356" width="165" height="42" rx="8"/><rect x="330" y="436" width="130" height="42" rx="8"/></g>
+<g font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#fff"><text x="345" y="143">78,000+ | ~39%</text><text x="345" y="223">Frequent</text><text x="345" y="303">Recurring</text><text x="345" y="383">Recurring</text><text x="345" y="463">Distributed tail</text></g>
+<text x="42" y="525" font-family="Arial,sans-serif" font-size="14" fill="#586879">Relative bar length; smoke deficiencies lead the notebook category ranking.</text></svg>

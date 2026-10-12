@@ -1,32 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="q3t q3d">
-  <title id="q3t">Severity distribution and model metrics</title>
-  <desc id="q3d">Bar visuals for severity class imbalance and key model metrics with scenario probabilities.</desc>
-  <rect width="1200" height="620" fill="#ffffff"/>
-  <text x="60" y="60" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#0f172a">Question 3 visual: Severity imbalance + model evidence</text>
-
-  <text x="60" y="110" font-family="Arial, sans-serif" font-size="23" fill="#334155">Class distribution (notebook): low-to-moderate 99.8951%, high severity 0.1049%</text>
-  <rect x="60" y="138" width="980" height="40" rx="10" fill="#dbeafe"/>
-  <rect x="60" y="138" width="978" height="40" rx="10" fill="#2563eb"/>
-  <rect x="1038" y="138" width="2" height="40" fill="#dc2626"/>
-  <text x="70" y="165" font-family="Arial, sans-serif" font-size="20" fill="#ffffff" font-weight="700">Low-to-moderate 99.8951%</text>
-  <text x="1048" y="165" font-family="Arial, sans-serif" font-size="18" fill="#7f1d1d">High 0.1049%</text>
-
-  <text x="60" y="236" font-family="Arial, sans-serif" font-size="23" fill="#334155">Model metrics (Random Forest notebook output)</text>
-  <g font-family="Arial, sans-serif" font-size="22" fill="#0f172a" font-weight="600">
-    <text x="60" y="286">Accuracy: 97.8595%</text>
-    <text x="60" y="336">High-severity recall: 45%</text>
-    <text x="60" y="386">Scenario prediction: Low-to-moderate severity</text>
-    <text x="60" y="436">Scenario probabilities: low 84.78% | high 15.22%</text>
-  </g>
-
-  <rect x="620" y="262" width="420" height="24" rx="8" fill="#bfdbfe"/>
-  <rect x="620" y="262" width="411" height="24" rx="8" fill="#1d4ed8"/>
-  <rect x="620" y="312" width="420" height="24" rx="8" fill="#fde68a"/>
-  <rect x="620" y="312" width="189" height="24" rx="8" fill="#d97706"/>
-  <rect x="620" y="412" width="420" height="24" rx="8" fill="#dbeafe"/>
-  <rect x="620" y="412" width="356" height="24" rx="8" fill="#2563eb"/>
-  <rect x="620" y="452" width="420" height="24" rx="8" fill="#fee2e2"/>
-  <rect x="620" y="452" width="64" height="24" rx="8" fill="#dc2626"/>
-
-  <text x="60" y="548" font-family="Arial, sans-serif" font-size="20" fill="#475569">These values are taken directly from notebook outputs (class distribution, classification report, and scenario prediction cell).</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">Severity distribution and model metrics</title><desc id="desc">Low-to-moderate cases represent 99.8951 percent, high severity 0.1049 percent, with 97.8595 percent accuracy and 45 percent recall.</desc>
+<rect width="1000" height="560" rx="20" fill="#fbfdfe"/><text x="42" y="52" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#182331">Severity distribution and model evidence</text><text x="42" y="82" font-family="Arial,sans-serif" font-size="16" fill="#586879">Rare-event screening requires recall, not accuracy alone</text>
+<text x="42" y="135" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#253747">Low-to-moderate: 99.8951%</text><rect x="42" y="151" width="900" height="34" rx="8" fill="#e7eef2"/><rect x="42" y="151" width="899" height="34" rx="8" fill="#2b8b84"/>
+<text x="42" y="220" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#253747">High severity: 0.1049%</text><rect x="42" y="236" width="900" height="34" rx="8" fill="#e7eef2"/><rect x="42" y="236" width="8" height="34" rx="4" fill="#d66d3c"/><text x="62" y="258" font-family="Arial,sans-serif" font-size="14" fill="#586879">Rare minority class</text>
+<rect x="42" y="305" width="425" height="92" rx="14" fill="#eaf5f8" stroke="#c5e0e6"/><text x="65" y="337" font-family="Arial,sans-serif" font-size="16" fill="#425866">Accuracy</text><text x="65" y="376" font-family="Arial,sans-serif" font-size="32" font-weight="700" fill="#176b87">97.8595%</text>
+<rect x="490" y="305" width="452" height="92" rx="14" fill="#fff4e7" stroke="#f0d2ad"/><text x="513" y="337" font-family="Arial,sans-serif" font-size="16" fill="#72583e">High-severity recall</text><text x="513" y="376" font-family="Arial,sans-serif" font-size="32" font-weight="700" fill="#b85b2b">45%</text>
+<rect x="42" y="420" width="900" height="90" rx="14" fill="#f2f5f7" stroke="#dce4eb"/><text x="64" y="450" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#253747">Scenario: CA + smoke + cycle 2 + 20 days</text><text x="64" y="482" font-family="Arial,sans-serif" font-size="17" fill="#253747">Low/moderate 84.78%  |  High 15.22%</text>
 </svg>
