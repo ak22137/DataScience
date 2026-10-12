@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="q1t q1d">
+  <title id="q1t">Top states by fire-safety citations</title>
+  <desc id="q1d">Horizontal bars showing California and Ohio exact counts and rank placement for Texas, New York, and Pennsylvania from the notebook top-15 plot.</desc>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="60" y="60" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#0f172a">Question 1 visual: State citation volume evidence</text>
+  <text x="60" y="96" font-family="Arial, sans-serif" font-size="22" fill="#334155">Source: data_science3.ipynb top-state analysis</text>
+
+  <g font-family="Arial, sans-serif" font-size="24" fill="#0f172a" font-weight="600">
+    <text x="60" y="166">CA — 23,600+ citations</text>
+    <text x="60" y="236">OH — 16,300+ citations</text>
+    <text x="60" y="306">TX — top-tier state (top-15 chart)</text>
+    <text x="60" y="376">NY — top-tier state (top-15 chart)</text>
+    <text x="60" y="446">PA — top-tier state (top-15 chart)</text>
+  </g>
+
+  <g>
+    <rect x="560" y="138" width="560" height="34" rx="8" fill="#2563eb"/>
+    <rect x="560" y="208" width="387" height="34" rx="8" fill="#3b82f6"/>
+    <rect x="560" y="278" width="332" height="34" rx="8" fill="#60a5fa"/>
+    <rect x="560" y="348" width="312" height="34" rx="8" fill="#60a5fa"/>
+    <rect x="560" y="418" width="294" height="34" rx="8" fill="#60a5fa"/>
+  </g>
+
+  <g font-family="Arial, sans-serif" font-size="22" fill="#0f172a">
+    <text x="1130" y="164" text-anchor="end">CA baseline</text>
+    <text x="960" y="234">OH/CA ≈ 0.69</text>
+    <text x="897" y="304">ranked in top group</text>
+    <text x="877" y="374">ranked in top group</text>
+    <text x="859" y="444">ranked in top group</text>
+  </g>
+
+  <text x="60" y="548" font-family="Arial, sans-serif" font-size="20" fill="#475569">Bars encode notebook-supported relative position; exact counts are shown where published in notebook/blog narrative.</text>
+</svg>

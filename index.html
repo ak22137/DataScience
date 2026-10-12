@@ -10,9 +10,11 @@
   <meta property="og:title" content="Inside Nursing Home Fire Safety — Finding Patterns in Citations">
   <meta property="og:description" content="State patterns, citation severity trends, and model-driven risk signals from CMS nursing home fire safety data.">
   <meta property="og:url" content="./">
+  <meta property="og:image" content="assets/fire-safety-thumbnail.svg">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Inside Nursing Home Fire Safety — Finding Patterns in Citations">
   <meta name="twitter:description" content="A practical, data-driven look at nursing home fire safety citation patterns.">
+  <meta name="twitter:image" content="assets/fire-safety-thumbnail.svg">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,15 +24,12 @@
     <h1>Inside Nursing Home Fire Safety — Finding Patterns in Citations</h1>
     <img
       class="thumbnail"
-      src="https://cdn.pixabay.com/photo/2014/01/17/19/01/fire-alarm-246068_1280.jpg"
-      alt="Wall-mounted smoke detector and fire alarm in a nursing-home hallway"
+      src="assets/fire-safety-thumbnail.svg"
+      alt="Illustrated fire alarm and smoke detector safety poster for nursing-home inspections"
       width="1280"
-      height="853"
-      loading="lazy">
+      height="720">
     <p class="attribution">
-      Thumbnail image source:
-      <a href="https://pixabay.com/photos/fire-alarm-smoke-detector-502893/">Pixabay — “Fire alarm smoke detector”</a>
-      (Pixabay Content License).
+      Thumbnail source: <code>assets/fire-safety-thumbnail.svg</code> (original repository illustration created for this project).
     </p>
     <p class="lede">
       This post summarizes notebook results from the CMS nursing-home fire-safety citations dataset. The analysis reviews
@@ -64,40 +63,44 @@
       </div>
       <div class="visual-evidence">
         <h3>Visual evidence</h3>
+        <figure class="chart">
+          <img src="assets/q1-state-visual.svg" alt="State citation visual with California and Ohio exact counts and ranked top-tier states">
+          <figcaption>Local visual for Q1: exact CA/OH values plus ranked top-tier states from the notebook top-15 chart.</figcaption>
+        </figure>
         <table class="data-table">
           <caption>State citation evidence from notebook outputs</caption>
           <thead>
             <tr>
               <th scope="col">State</th>
-              <th scope="col">Notebook statistic</th>
-              <th scope="col">Relative position</th>
+              <th scope="col">Visible value</th>
+              <th scope="col">Notebook basis</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">California (CA)</th>
-              <td>Over 23,600 citations</td>
-              <td>Highest in notebook chart</td>
+              <td>23,600+ citations</td>
+              <td>Highest bar in top-15 state chart</td>
             </tr>
             <tr>
               <th scope="row">Ohio (OH)</th>
-              <td>Over 16,300 citations</td>
-              <td>Second-highest in notebook chart</td>
+              <td>16,300+ citations</td>
+              <td>Second-highest bar in top-15 state chart</td>
             </tr>
             <tr>
               <th scope="row">Texas (TX)</th>
-              <td>Included in top cluster</td>
-              <td>Upper tier (top-15 chart)</td>
+              <td>Top-tier rank (top-15)</td>
+              <td>Appears directly below OH in notebook ranking group</td>
             </tr>
             <tr>
               <th scope="row">New York (NY)</th>
-              <td>Included in top cluster</td>
-              <td>Upper tier (top-15 chart)</td>
+              <td>Top-tier rank (top-15)</td>
+              <td>Appears in top-ranking state cluster</td>
             </tr>
             <tr>
               <th scope="row">Pennsylvania (PA)</th>
-              <td>Included in top cluster</td>
-              <td>Upper tier (top-15 chart)</td>
+              <td>Top-tier rank (top-15)</td>
+              <td>Appears in top-ranking state cluster</td>
             </tr>
           </tbody>
         </table>
@@ -125,7 +128,7 @@
         </div>
         <figure class="chart">
           <img src="assets/state-citations-top15.png" alt="Notebook chart of top states by fire-safety citation count">
-          <figcaption>Supporting notebook PNG chart (optional): Top 15 states by citation volume.</figcaption>
+          <figcaption>Notebook-exported PNG (backup visual): Top 15 states by citation volume.</figcaption>
         </figure>
       </div>
       <div class="conclusion">
@@ -146,35 +149,44 @@
       </div>
       <div class="visual-evidence">
         <h3>Visual evidence</h3>
+        <figure class="chart">
+          <img src="assets/q2-category-visual.svg" alt="Deficiency-category visual showing smoke deficiencies dominate and other categories ranked below">
+          <figcaption>Local visual for Q2: smoke-deficiency magnitude plus notebook-supported category ordering.</figcaption>
+        </figure>
         <table class="data-table">
           <caption>Deficiency-category evidence from notebook narrative and chart</caption>
           <thead>
             <tr>
               <th scope="col">Category</th>
-              <th scope="col">Notebook statistic</th>
-              <th scope="col">Relative position</th>
+              <th scope="col">Visible value</th>
+              <th scope="col">Notebook basis</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">Smoke Deficiencies</th>
-              <td>Over 78,000 citations (~39% of all records)</td>
-              <td>Largest category</td>
+              <td>78,000+ citations (~39% of records)</td>
+              <td>Largest category in notebook top-10 chart</td>
             </tr>
             <tr>
               <th scope="row">Gas, Vacuum, or Electrical Systems</th>
-              <td>Frequently occurring category</td>
-              <td>Second tier</td>
+              <td>Second-tier frequency</td>
+              <td>Appears as the next major group after smoke deficiencies</td>
             </tr>
             <tr>
               <th scope="row">Sprinkler / suppression-related issues</th>
-              <td>Recurring in top categories</td>
-              <td>Next tier</td>
+              <td>Recurring high-frequency group</td>
+              <td>Appears within top categories in notebook ranking</td>
             </tr>
             <tr>
-              <th scope="row">Other fire-safety systems categories</th>
-              <td>Present across the top-10 chart</td>
-              <td>Distributed tail</td>
+              <th scope="row">Means of egress / exit path issues</th>
+              <td>Recurring high-frequency group</td>
+              <td>Appears within top categories in notebook ranking</td>
+            </tr>
+            <tr>
+              <th scope="row">Fire-safety plan / drill issues</th>
+              <td>Recurring high-frequency group</td>
+              <td>Appears within top categories in notebook ranking</td>
             </tr>
           </tbody>
         </table>
@@ -198,7 +210,7 @@
         </div>
         <figure class="chart">
           <img src="assets/deficiency-categories-top10.png" alt="Notebook chart of top fire-safety deficiency categories">
-          <figcaption>Supporting notebook PNG chart (optional): Top 10 deficiency categories.</figcaption>
+          <figcaption>Notebook-exported PNG (backup visual): Top 10 deficiency categories.</figcaption>
         </figure>
       </div>
       <div class="conclusion">
@@ -219,6 +231,10 @@
       </div>
       <div class="visual-evidence">
         <h3>Visual evidence</h3>
+        <figure class="chart">
+          <img src="assets/q3-model-visual.svg" alt="Severity distribution and model metrics visual with percentages and probabilities">
+          <figcaption>Local visual for Q3: class imbalance and model outputs with explicit percentages.</figcaption>
+        </figure>
         <table class="data-table">
           <caption>Severity distribution (notebook-supported)</caption>
           <thead>
@@ -258,7 +274,7 @@
         </div>
         <figure class="chart">
           <img src="assets/severity-distribution.png" alt="Notebook chart showing scope-severity code distribution concentrated in lower-severity letters">
-          <figcaption>Supporting notebook PNG chart (optional): scope-severity distribution.</figcaption>
+          <figcaption>Notebook-exported PNG (backup visual): scope-severity distribution.</figcaption>
         </figure>
       </div>
 
