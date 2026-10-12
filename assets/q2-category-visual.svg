@@ -1,33 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="q2t q2d">
-  <title id="q2t">Deficiency category distribution evidence</title>
-  <desc id="q2d">Horizontal bars showing smoke deficiencies as the dominant category and relative ranking of other notebook top categories.</desc>
-  <rect width="1200" height="620" fill="#ffffff"/>
-  <text x="60" y="60" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#0f172a">Question 2 visual: Deficiency category evidence</text>
-  <text x="60" y="96" font-family="Arial, sans-serif" font-size="22" fill="#334155">Source: data_science3.ipynb top-category analysis</text>
-
-  <g font-family="Arial, sans-serif" font-size="23" fill="#0f172a" font-weight="600">
-    <text x="60" y="166">Smoke Deficiencies — 78,000+ citations (~39%)</text>
-    <text x="60" y="236">Gas/Vacuum/Electrical Systems — second-tier frequency</text>
-    <text x="60" y="306">Sprinkler/Suppression related issues — recurring</text>
-    <text x="60" y="376">Means of Egress/Exit paths — recurring</text>
-    <text x="60" y="446">Fire Safety Plan & drills — recurring</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+  <title id="title">Most common fire safety deficiency categories</title>
+  <desc id="desc">Smoke deficiencies are the largest category with more than 78,000 citations, approximately 39 percent of records.</desc>
+  <rect width="1000" height="560" fill="#ffffff"/>
+  <text x="50" y="58" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#132035">Most common deficiency categories</text>
+  <text x="50" y="92" font-family="Arial, sans-serif" font-size="18" fill="#5f6f86">Smoke deficiencies are the dominant category</text>
+  <g font-family="Arial, sans-serif" font-size="20" fill="#132035">
+    <text x="55" y="160">Smoke deficiencies</text><text x="55" y="235">Gas / vacuum / electrical</text><text x="55" y="310">Sprinkler / suppression</text><text x="55" y="385">Egress / exit paths</text><text x="55" y="460">Other top categories</text>
   </g>
-
-  <g>
-    <rect x="620" y="138" width="500" height="34" rx="8" fill="#7c3aed"/>
-    <rect x="620" y="208" width="230" height="34" rx="8" fill="#8b5cf6"/>
-    <rect x="620" y="278" width="170" height="34" rx="8" fill="#a78bfa"/>
-    <rect x="620" y="348" width="154" height="34" rx="8" fill="#a78bfa"/>
-    <rect x="620" y="418" width="138" height="34" rx="8" fill="#c4b5fd"/>
+  <g fill="#7c6ee6">
+    <rect x="330" y="135" width="550" height="38" rx="10"/><rect x="330" y="210" width="235" height="38" rx="10"/><rect x="330" y="285" width="155" height="38" rx="10"/><rect x="330" y="360" width="130" height="38" rx="10"/><rect x="330" y="435" width="105" height="38" rx="10"/>
   </g>
-
-  <g font-family="Arial, sans-serif" font-size="22" fill="#0f172a">
-    <text x="1130" y="164" text-anchor="end">largest category</text>
-    <text x="860" y="234">relative index ≈ 0.46</text>
-    <text x="800" y="304">relative index ≈ 0.34</text>
-    <text x="784" y="374">relative index ≈ 0.31</text>
-    <text x="768" y="444">relative index ≈ 0.28</text>
+  <g font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">
+    <text x="780" y="162">78,000+ | ~39%</text><text x="475" y="237">Frequent</text><text x="400" y="312">Recurring</text><text x="375" y="387">Recurring</text><text x="350" y="462">Distributed tail</text>
   </g>
-
-  <text x="60" y="548" font-family="Arial, sans-serif" font-size="20" fill="#475569">Smoke count and share are explicit notebook-supported values; remaining bars encode ordered relative prevalence from the notebook top-10 chart.</text>
+  <line x1="330" y1="505" x2="880" y2="505" stroke="#b8c7dc" stroke-width="2"/>
+  <text x="330" y="535" font-family="Arial, sans-serif" font-size="16" fill="#5f6f86">Relative bar length; smoke deficiencies lead the notebook category ranking.</text>
 </svg>

@@ -1,94 +1,64 @@
 # CMS Nursing-Home Fire-Safety Citations Analysis
 
-This repository contains a CRISP-DM style analysis of CMS nursing-home fire-safety citations and a companion blog page that summarizes the key findings from `data_science3.ipynb`.
+This repository contains a CRISP-DM-style analysis of CMS nursing-home fire-safety citations and a simple blog page that presents the findings with visible local visuals.
 
 ## Motivation
 
-Fire-safety failures in nursing homes can directly threaten residents who may have limited mobility and need assisted evacuation. That makes proactive detection of severe citation patterns especially important: waiting until only the worst events occur is too late for prevention. This project was chosen to explore whether historical citation data can highlight where enforcement pressure is highest, which deficiency types recur most often, and how a basic model can help prioritize follow-up when severe outcomes are rare but high impact.
+Fire-safety failures in nursing homes can threaten residents who may have limited mobility or need assisted evacuation. This project examines where citations are concentrated, which deficiency categories recur most often, and whether a model can help prioritize follow-up for rare high-severity cases.
 
-## Blog Structure Requirements Covered (`index.html`)
+## Blog requirements covered
 
-- The page keeps the concise title: **Inside Nursing Home Fire Safety — Finding Patterns in Citations**.
-- A large **hero thumbnail image** appears immediately after the `<h1>` title, with visible attribution directly below it.
-- Each of the three numbered questions has explicit blocks labeled:
-  - **Hypothesis**
-  - **Answer**
-  - **Visual evidence** (HTML-native table + CSS bar chart, with optional PNG support figure)
-  - **Conclusion**
+`index.html` contains a title, a local thumbnail immediately after the title, and three numbered questions. Each question includes four visible sections: **Hypothesis**, **Answer**, **Visual evidence**, and **Conclusion**. The visual evidence uses committed SVG charts plus accessible HTML tables, so the visuals render without external image dependencies.
 
-## Questions, Hypotheses, and Evidence Summary
+## Questions, hypotheses, and results
 
-1. **Which states see the highest volumes of fire-safety citations?**  
-   - **Hypothesis:** Larger-state systems should contribute the most citations.  
-   - **Evidence:** Notebook-backed state section includes a table and bar chart showing **California (>23,600)** and **Ohio (>16,300)** at the top, with **TX/NY/PA** in the upper tier.  
-   - **Conclusion:** Hypothesis supported.
+1. **Which states see the highest volumes of fire-safety citations?**
+   - **Hypothesis:** Larger nursing-home systems will produce the highest citation volumes.
+   - **Evidence:** The local Q1 chart and table show California above 23,600 citations and Ohio above 16,300; Texas, New York, and Pennsylvania appear in the notebook's top-15 group.
+   - **Conclusion:** Supported by the notebook ranking.
 
-2. **What are the most common deficiency categories?**  
-   - **Hypothesis:** Smoke-related violations are the most common deficiency type.  
-   - **Evidence:** HTML-native table/bar chart plus notebook figure show **Smoke Deficiencies (>78,000; ~39%)** as dominant, with gas/vacuum/electrical and related systems behind it.  
-   - **Conclusion:** Hypothesis supported.
+2. **What are the most common safety issues?**
+   - **Hypothesis:** Smoke-related deficiencies are the dominant issue.
+   - **Evidence:** The local Q2 chart and table show Smoke Deficiencies above 78,000 citations, approximately 39% of the 200,188 records, ahead of other categories.
+   - **Conclusion:** Supported.
 
-3. **Can high-severity citations be predicted from early features?**  
-   - **Hypothesis:** A model can provide useful high-severity risk screening, but class imbalance limits certainty.  
-   - **Evidence:** Severity-distribution table/bar chart (99.8951% low-to-moderate vs 0.1049% high severity), model metrics (**97.8595% accuracy**, **45% high-severity recall**), and scenario probabilities (**84.78% low-to-moderate**, **15.22% high severity**).  
-   - **Conclusion:** Partially supported; useful for triage, not causality claims.
+3. **Can high-severity citations be predicted?**
+   - **Hypothesis:** A model can support screening, but class imbalance limits certainty.
+   - **Evidence:** The local Q3 chart and table show 99.8951% low-to-moderate versus 0.1049% high severity, 97.8595% accuracy, 45% high-severity recall, and a scenario probability of 84.78% low-to-moderate versus 15.22% high severity.
+   - **Conclusion:** Partially supported for triage; not evidence of causality.
 
-## Libraries Used
+## Libraries and installation
 
-The notebook uses:
-
-- `pandas`
-- `matplotlib`
-- `seaborn`
-- `scikit-learn`
-- `numpy`
-
-Optional install command:
+The notebook uses `pandas`, `numpy`, `matplotlib`, `seaborn`, and `scikit-learn`.
 
 ```bash
-pip install pandas matplotlib seaborn scikit-learn numpy
+pip install pandas numpy matplotlib seaborn scikit-learn
 ```
 
-## Running the Analysis
+## Running the project
 
-1. Open and run `data_science3.ipynb` from top to bottom.
-2. Ensure internet access is available so the CMS CSV URL can be loaded.
-3. Open `index.html` to view the blog summary page.
+1. Open `data_science3.ipynb` and run it from top to bottom. Internet access is needed for the CMS CSV URL.
+2. Open `index.html` directly or deploy the repository with GitHub Pages.
 
-## Repository File Guide
+## Repository files
 
-- `index.html` — Blog-style post with the three questions, answers, notebook-backed visuals, and links to sources.
-- `styles.css` — Responsive/accessibility-focused styling for the hero thumbnail, question cards, HTML-native data tables, and CSS bar charts.
-- `data_science3.ipynb` — Full analysis notebook (data understanding, EDA, feature engineering, modeling, and scenario inference).
-- `README.md` — Project documentation and reproducibility notes.
-- `assets/state-citations-top15.png` — Optional supporting state citation-volume chart from notebook output.
-- `assets/deficiency-categories-top10.png` — Optional supporting deficiency-category chart from notebook output.
-- `assets/severity-distribution.png` — Optional supporting scope-severity chart from notebook output.
+- `index.html` — Blog post with the title image, three questions, hypotheses, answers, local visuals, tables, and conclusions.
+- `styles.css` — Responsive styling for the blog, local charts, bars, tables, captions, and mobile layout.
+- `data_science3.ipynb` — CRISP-DM analysis notebook, EDA, feature engineering, model, and scenario output.
+- `assets/fire-safety-thumbnail.svg` — Original local project thumbnail illustration; no external hotlink required.
+- `assets/q1-state-visual.svg` — Local state citation-volume visual.
+- `assets/q2-category-visual.svg` — Local deficiency-category visual.
+- `assets/q3-model-visual.svg` — Local severity/model visual.
+- `assets/state-citations-top15.png`, `assets/deficiency-categories-top10.png`, `assets/severity-distribution.png` — Optional notebook-exported backup charts.
+- `README.md` — Project documentation.
 
-## Image/Chart Assets and Attribution
+## Data source and acknowledgements
 
-- **CMS dataset**: Nursing Home Fire Safety Citations CSV  
-  https://data.cms.gov/provider-data/sites/default/files/resources/98aa3596a9af76e285beb7aa7c7244d9_1790792146/NH_FireSafetyCitations_Sep2026_2.csv
-- **Hero thumbnail attribution**: Pixabay, “Fire alarm smoke detector”  
-  https://pixabay.com/photos/fire-alarm-smoke-detector-502893/  
-  License: Pixabay Content License
-- **Notebook PNG chart assets**:
-  - `assets/state-citations-top15.png`
-  - `assets/deficiency-categories-top10.png`
-  - `assets/severity-distribution.png`
-  - Source: exported from notebook visualizations in `data_science3.ipynb`
+- CMS Nursing Home Fire Safety Citations dataset: https://data.cms.gov/provider-data/sites/default/files/resources/98aa3596a9af76e285beb7aa7c7244d9_1790792146/NH_FireSafetyCitations_Sep2026_2.csv
+- The local thumbnail and SVG visuals are original project assets created for this repository. The analysis uses CMS data and standard open-source Python libraries.
 
-## Data Source and Acknowledgements
+This project is educational and does not replace official regulatory inspection, legal compliance review, or professional fire-safety advice.
 
-This analysis is for educational exploration and does **not** replace official regulatory review, inspection, or legal compliance assessment.
+## Model caveats
 
-## Model Caveats
-
-- The target class (high severity) is strongly imbalanced (~0.1% positive cases).
-- In this setting, a high overall accuracy can still hide missed severe cases.
-- Recall/sensitivity for the minority class should be monitored alongside precision and confusion-matrix behavior before operational use.
-
-## Quick Links
-
-- Notebook: `data_science3.ipynb`
-- CMS data source: link above
+The high-severity class is extremely rare, so accuracy alone can be misleading. Recall/sensitivity, precision, confusion-matrix behavior, and validation on new data should be reviewed before any operational use.
